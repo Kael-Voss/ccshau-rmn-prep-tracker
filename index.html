@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B.Sc Agri Rank 1 Mission</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HERO SECTION -->
+    <header class="hero">
+        <div class="hero-content">
+            <h1>🚀 Mission Haryana Rank 1</h1>
+            <p class="hero-subtitle">
+                B.Sc Agriculture Entrance Preparation Dashboard
+            </p>
+
+            <div class="countdown-box">
+                <h2>Exam Countdown</h2>
+                <div id="countdown">
+                    <span id="days">00</span>
+                    <small>Days Left</small>
+                </div>
+
+                <div class="date-input-section">
+                    <label>Select Exam Date</label>
+                    <input type="date" id="examDate">
+                    <button onclick="saveExamDate()">Save Date</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="dailyQuote" class="daily-quote"></div>
+
+    <section class="mission-box">
+
+        <h2>🎯 Mission Control</h2>
+
+        <div class="mission-grid">
+
+            <div class="mission-card">
+                <h3>Target</h3>
+                <p>Haryana Rank 1</p>
+            </div>
+
+            <div class="mission-card">
+                <h3>Exam</h3>
+                <p>B.Sc Agri Entrance</p>
+            </div>
+
+            <div class="mission-card">
+                <h3>Focus</h3>
+                <p>Consistency</p>
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- QUICK STATS -->
+    <section class="stats-section">
+
+        <div class="stat-card">
+            <h3>📚 Chapters Completed</h3>
+            <p id="completedChapters">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>🎯 Daily Goals Completed</h3>
+            <p id="goalsCompleted">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>🔥 Current Streak</h3>
+            <p id="streakCount">0 Days</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>⭐ Readiness Score</h3>
+            <p id="readinessScore">0%</p>
+        </div>
+
+        <section class="goal-section">
+
+            <h2>🏅 Achievements</h2>
+
+            <div id="achievementContainer">
+
+            </div>
+
+        </section>
+
+        <a href="weekly-progress.html" class="nav-card">
+            <h3>📈 Weekly Progress</h3>
+            <p>Track study consistency.</p>
+        </a>
+
+    </section>
+
+    <section class="subject-progress">
+
+        <h2>📚 Subject Progress</h2>
+
+        <div id="subjectProgressContainer"></div>
+
+    </section>
+
+    <section class="goal-section">
+
+        <h2>📌 Today's Study Plan</h2>
+
+        <div id="studyPlanContainer">
+
+            <div class="stat-card">
+
+                <p>
+                    Generate today's plan to see your next tasks.
+                </p>
+
+            </div>
+
+        </div>
+
+        <br>
+
+        <button onclick="generateStudyPlan()">
+            Generate Plan
+        </button>
+
+    </section>
+
+    <!-- DAILY GOAL -->
+    <section class="goal-section">
+
+        <h2>🎯 Today's Goals</h2>
+
+        <div class="goal-input">
+
+            <input type="text" id="goalInput" placeholder="Enter today's study goal...">
+
+            <button onclick="addGoal()">
+                Add Goal
+            </button>
+
+        </div>
+
+        <ul id="goalList"></ul>
+
+    </section>
+
+    <!-- QUICK NAVIGATION -->
+    <section class="navigation-section">
+
+        <h2>📌 Study Sections</h2>
+
+        <div class="nav-grid">
+
+            <a href="syllabus.html" class="nav-card">
+                <h3>📖 Syllabus Tracker</h3>
+                <p>
+                    Track chapter completion and progress.
+                </p>
+            </a>
+
+            <a href="performance.html" class="nav-card">
+                <h3>📊 Performance Tracker</h3>
+                <p>
+                    Enter chapter scores and calculate accuracy.
+                </p>
+            </a>
+
+            <a href="analytics.html" class="nav-card">
+                <h3>📈 Analytics</h3>
+                <p>
+                    Strong and weak chapter analysis.
+                </p>
+            </a>
+
+        </div>
+
+    </section>
+
+    <!-- NIGHT CHECK-IN -->
+    <section class="night-section">
+
+        <h2>🌙 Night Check-In</h2>
+
+        <div class="night-card">
+
+            <label>
+                Did you complete today's goals?
+            </label>
+
+            <select id="goalStatus">
+                <option value="yes">✅ Yes</option>
+                <option value="no">❌ No</option>
+            </select>
+
+            <label>
+                Study Hours Today
+            </label>
+
+            <input type="number" id="studyHours" min="0" max="24" placeholder="Hours">
+
+            <label>
+                Satisfaction Level
+            </label>
+
+            <select id="satisfaction">
+                <option>🔥 Excellent</option>
+                <option>🙂 Good</option>
+                <option>😐 Average</option>
+                <option>😞 Poor</option>
+            </select>
+
+            <button onclick="saveNightReview()">
+                Save Review
+            </button>
+
+        </div>
+
+    </section>
+
+    <section class="goal-section">
+
+        <h2>💾 Data Backup</h2>
+
+        <div class="goal-input">
+
+            <button onclick="exportData()">
+                📤 Export Data
+            </button>
+
+            <input type="file" id="importFile" accept=".json">
+
+            <button onclick="importData()">
+                📥 Import Data
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- MOTIVATION SECTION -->
+    <section class="motivation-section">
+
+        <h2>🏆 Remember Your Goal</h2>
+
+        <div class="motivation-card">
+
+            <p>
+                Every chapter completed today brings you closer
+                to Haryana Rank 1.
+            </p>
+
+            <h3>
+                Consistency > Motivation
+            </h3>
+
+        </div>
+
+    </section>
+
+    <!-- BOTTOM NAVIGATION -->
+
+    <nav class="bottom-nav">
+
+        <a href="index.html">
+            🏠
+            <span>Home</span>
+        </a>
+
+        <a href="syllabus.html">
+            📖
+            <span>Syllabus</span>
+        </a>
+
+        <a href="performance.html">
+            📊
+            <span>Performance</span>
+        </a>
+
+        <a href="analytics.html">
+            📈
+            <span>Analytics</span>
+        </a>
+
+    </nav>
+
+    <footer>
+        <p>
+            Mission Haryana Rank 1 🚀
+        </p>
+    </footer>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>

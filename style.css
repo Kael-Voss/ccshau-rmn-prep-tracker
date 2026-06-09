@@ -1,0 +1,563 @@
+/* GOOGLE FONT */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    background:#f4fff6;
+    color:#222;
+    min-height:100vh;
+}
+
+/* HERO SECTION */
+
+.hero{
+    background:linear-gradient(135deg,#0f9d58,#1b5e20);
+    color:white;
+    text-align:center;
+    padding:60px 20px;
+}
+
+.hero h1{
+    font-size:3rem;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+.hero-subtitle{
+    font-size:1.1rem;
+    opacity:0.9;
+    margin-bottom:35px;
+}
+
+/* COUNTDOWN */
+
+.countdown-box{
+    max-width:450px;
+    margin:auto;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(10px);
+    border-radius:20px;
+    padding:25px;
+}
+
+.countdown-box h2{
+    margin-bottom:15px;
+}
+
+#countdown{
+    margin-bottom:20px;
+}
+
+#days{
+    font-size:4rem;
+    font-weight:800;
+    display:block;
+}
+
+#countdown small{
+    font-size:1rem;
+}
+
+.date-input-section{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+}
+
+.date-input-section input{
+    padding:12px;
+    border:none;
+    border-radius:10px;
+}
+
+.date-input-section button{
+    padding:12px;
+    border:none;
+    border-radius:10px;
+    background:white;
+    color:#0f9d58;
+    font-weight:700;
+    cursor:pointer;
+}
+
+/* STATS */
+
+.stats-section{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+    padding:40px;
+}
+
+.stat-card{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    text-align:center;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.stat-card:hover{
+    transform:translateY(-5px);
+}
+
+.stat-card h3{
+    margin-bottom:10px;
+    color:#1b5e20;
+}
+
+.stat-card p{
+    font-size:2rem;
+    font-weight:700;
+}
+
+/* GOALS */
+
+#studyPlanContainer{
+    margin-top:20px;
+}
+
+.plan-item{
+    background:white;
+    padding:15px;
+    margin-bottom:10px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,.05);
+    font-weight:500;
+}
+
+.goal-section{
+    padding:40px;
+}
+
+.goal-section h2{
+    margin-bottom:20px;
+    color:#1b5e20;
+}
+
+.goal-input{
+    display:flex;
+    gap:10px;
+    margin-bottom:20px;
+}
+
+.goal-input input{
+    flex:1;
+    padding:15px;
+    border:2px solid #d7f5dd;
+    border-radius:12px;
+}
+
+.goal-input button{
+    padding:15px 25px;
+    border:none;
+    border-radius:12px;
+    background:#0f9d58;
+    color:white;
+    cursor:pointer;
+    font-weight:600;
+}
+
+#goalList{
+    list-style:none;
+}
+
+#goalList li{
+    background:white;
+    margin-bottom:10px;
+    padding:15px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);
+}
+
+.achievement-card{
+
+    background:white;
+
+    padding:15px;
+
+    border-radius:15px;
+
+    margin-bottom:10px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+    font-weight:600;
+}
+
+/* NAVIGATION */
+
+.navigation-section{
+    padding:40px;
+}
+
+.navigation-section h2{
+    margin-bottom:20px;
+    color:#1b5e20;
+}
+
+.nav-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.nav-card{
+    text-decoration:none;
+    color:#222;
+    background:white;
+    padding:25px;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+    transition:0.3s;
+}
+
+.nav-card:hover{
+    transform:translateY(-6px);
+}
+
+.nav-card h3{
+    margin-bottom:10px;
+    color:#0f9d58;
+}
+
+/* NIGHT REVIEW */
+
+.night-section{
+    padding:40px;
+}
+
+.night-section h2{
+    margin-bottom:20px;
+    color:#1b5e20;
+}
+
+.night-card{
+    max-width:700px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.08);
+
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+}
+
+.night-card input,
+.night-card select{
+    padding:12px;
+    border:2px solid #d7f5dd;
+    border-radius:10px;
+}
+
+.night-card button{
+    padding:14px;
+    border:none;
+    border-radius:10px;
+    background:#0f9d58;
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+}
+
+/* MOTIVATION */
+
+.motivation-section{
+    padding:40px;
+}
+
+.motivation-card{
+    max-width:800px;
+    margin:auto;
+    text-align:center;
+    background:linear-gradient(
+        135deg,
+        #0f9d58,
+        #2e7d32
+    );
+
+    color:white;
+    padding:40px;
+    border-radius:25px;
+}
+
+.motivation-card p{
+    font-size:1.1rem;
+    margin-bottom:15px;
+}
+
+.motivation-card h3{
+    font-size:2rem;
+}
+
+.progress-card{
+    margin-bottom:20px;
+}
+
+.progress-card p{
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+.progress-percent{
+    float:right;
+}
+
+.bar{
+    height:16px;
+    background:#dfeee2;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.fill{
+    height:100%;
+    background:#0f9d58;
+    border-radius:20px;
+    transition:0.5s;
+}
+
+.daily-quote{
+
+    margin-top:20px;
+
+    font-size:1.1rem;
+
+    font-weight:600;
+
+    color:white;
+
+    opacity:.9;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+    padding:25px;
+    margin-top:40px;
+    background:#1b5e20;
+    color:white;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+    .hero h1{
+        font-size:2rem;
+    }
+
+    #days{
+        font-size:3rem;
+    }
+
+    .goal-input{
+        flex-direction:column;
+    }
+
+    .stats-section,
+    .goal-section,
+    .navigation-section,
+    .night-section,
+    .motivation-section{
+        padding:20px;
+    }
+}
+
+/* MOBILE OPTIMIZATION */
+
+@media (max-width: 768px){
+
+    .hero{
+        padding:40px 15px;
+    }
+
+    .hero h1{
+        font-size:2rem;
+        line-height:1.2;
+    }
+
+    .hero-subtitle{
+        font-size:0.95rem;
+    }
+
+    .stats-section{
+        grid-template-columns:1fr;
+    }
+
+    .nav-grid{
+        grid-template-columns:1fr;
+    }
+
+    .stat-card{
+        padding:20px;
+    }
+
+    .stat-card p{
+        font-size:1.6rem;
+    }
+
+    .goal-input{
+        flex-direction:column;
+    }
+
+    .goal-input button{
+        width:100%;
+    }
+
+    .night-card{
+        padding:20px;
+    }
+
+    .night-card button{
+        width:100%;
+    }
+
+    input,
+    select,
+    button{
+        font-size:16px;
+    }
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    overflow-x:hidden;
+}
+
+/* =====================
+MISSION CONTROL
+===================== */
+
+.mission-box{
+    padding:30px;
+}
+
+.mission-box h2{
+    text-align:center;
+    color:#1b5e20;
+    margin-bottom:20px;
+}
+
+.mission-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+
+.mission-card{
+    background:white;
+    padding:20px;
+    border-radius:20px;
+    text-align:center;
+    box-shadow:0 10px 20px rgba(0,0,0,.08);
+}
+
+.mission-card h3{
+    color:#0f9d58;
+    margin-bottom:10px;
+}
+
+/* =====================
+PROGRESS BARS
+===================== */
+
+.subject-progress{
+    padding:30px;
+}
+
+.subject-progress h2{
+    margin-bottom:20px;
+    color:#1b5e20;
+}
+
+.progress-item{
+    margin-bottom:20px;
+}
+
+.progress-item p{
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+.bar{
+    height:16px;
+    background:#dfeee2;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.fill{
+    height:100%;
+    border-radius:20px;
+}
+
+.agri{
+    width:75%;
+    background:#0f9d58;
+}
+
+.science{
+    width:65%;
+    background:#0f9d58;
+}
+
+.maths{
+    width:55%;
+    background:#0f9d58;
+}
+
+.sst{
+    width:60%;
+    background:#0f9d58;
+}
+
+/* =====================
+BOTTOM NAV
+===================== */
+
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    width:100%;
+    background:white;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    padding:12px 0;
+    box-shadow:0 -5px 15px rgba(0,0,0,.08);
+    z-index:999;
+}
+
+.bottom-nav a{
+    text-decoration:none;
+    color:#1b5e20;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    font-size:14px;
+    font-weight:600;
+}
+
+.bottom-nav span{
+    font-size:12px;
+    margin-top:3px;
+}
+
+body{
+    padding-bottom:90px;
+}

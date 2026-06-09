@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Performance Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>📊 Performance Tracker</h1>
+            <p class="hero-subtitle">
+                Measure. Improve. Repeat.
+            </p>
+        </div>
+    </header>
+
+    <section class="night-section">
+
+        <div class="night-card">
+
+            <label>Subject</label>
+
+            <select id="subject" onchange="loadChapters()">
+                <option>Agriculture</option>
+                <option>Science</option>
+                <option>Social Science</option>
+                <option>Maths</option>
+            </select>
+
+            <label>Chapter Name</label>
+
+            <select id="chapter">
+
+                <option value="">
+                    Select Chapter
+                </option>
+
+            </select>
+
+            <label>Total Questions</label>
+
+            <input type="number" id="total" placeholder="50">
+
+            <label>Correct Answers</label>
+
+            <input type="number" id="correct" placeholder="42">
+
+            <label>Wrong Answers</label>
+
+            <input type="number" id="wrong" placeholder="8">
+
+            <button onclick="calculatePerformance()">
+                Calculate Performance
+            </button>
+
+        </div>
+
+    </section>
+
+    <section class="stats-section">
+
+        <div class="stat-card">
+            <h3>Accuracy</h3>
+            <p id="accuracy">0%</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Grade</h3>
+            <p id="grade">-</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Status</h3>
+            <p id="status">-</p>
+        </div>
+
+    </section>
+
+    <section class="goal-section">
+
+        <h2>📁 Saved Records</h2>
+
+        <div id="records"></div>
+
+    </section>
+
+    <script>
+
+        const chapters = {
+
+            Agriculture: [
+
+                "Introduction of Agriculture",
+                "Haryana in Agriculture",
+                "India in Agriculture",
+                "Agriculture Experts",
+                "Classification of Crops",
+                "Crop Cultivation Terminology",
+                "Types of Agriculture",
+                "Soil Science",
+                "Properties of Soil",
+                "Climate and Monsoon",
+                "Irrigation Methods",
+                "Agronomy",
+                "Rabi Crops",
+                "Kharif Crops",
+                "Fruit Crops",
+                "Vegetable Crops",
+                "Floriculture",
+                "Seed Technology",
+                "Weed Science",
+                "Agricultural Implements",
+                "Agricultural Economics",
+                "Animal Husbandry"
+
+            ],
+
+            Science: [
+
+                "Chemical Reactions",
+                "Acids Bases and Salts",
+                "Metals and Non Metals",
+                "Carbon and Compounds",
+                "Periodic Classification",
+
+                "Life Process",
+                "Control and Coordination",
+                "Reproduction",
+                "Heredity and Evolution",
+                "Our Environment",
+                "Natural Resources",
+
+                "Reflection and Refraction",
+                "Human Eye",
+                "Electricity",
+                "Magnetic Effects",
+                "Sources of Energy"
+
+            ],
+
+            "Social Science": [
+
+                "Sarasvati Indus Civilisation",
+                "Ancient Civilisations",
+                "Major Philosophies",
+                "Medieval Society",
+                "Christianity and Islam",
+                "Foreign Invasions",
+                "Colonialism",
+                "Freedom Movement",
+                "50 Years of Independent India",
+
+                "Resources and Development",
+                "Forest and Wildlife",
+                "Water Resources",
+                "Agriculture",
+                "Minerals and Energy",
+                "Manufacturing Industries",
+                "Lifelines of Economy",
+
+                "Power Sharing",
+                "Federalism",
+                "Gender Religion and Caste",
+                "Political Parties",
+                "Outcomes of Democracy",
+
+                "Development",
+                "Sectors of Economy",
+                "Money and Credit",
+                "Globalisation",
+                "Consumer Rights"
+            ],
+
+            Maths: [
+
+                "Real Numbers",
+                "Polynomials",
+                "Linear Equations",
+                "Quadratic Equations",
+                "Arithmetic Progressions",
+                "Coordinate Geometry",
+                "Triangles",
+                "Circles",
+                "Heights and Distances",
+                "Mensuration",
+                "Statistics",
+                "Probability"
+
+            ]
+
+        };
+
+        function loadChapters() {
+
+            const subject =
+                document.getElementById(
+                    "subject"
+                ).value;
+
+            const chapterSelect =
+                document.getElementById(
+                    "chapter"
+                );
+
+            chapterSelect.innerHTML =
+                `<option value="">
+        Select Chapter
+        </option>`;
+
+            chapters[subject]
+                .forEach(chapter => {
+
+                    const option =
+                        document.createElement(
+                            "option"
+                        );
+
+                    option.value =
+                        chapter;
+
+                    option.textContent =
+                        chapter;
+
+                    chapterSelect.appendChild(
+                        option
+                    );
+
+                });
+        }
+
+        function calculatePerformance() {
+
+            const subject =
+                document.getElementById("subject").value;
+
+            const chapter =
+                document.getElementById("chapter").value;
+
+            const total =
+                Number(
+                    document.getElementById("total").value
+                );
+
+            const correct =
+                Number(
+                    document.getElementById("correct").value
+                );
+
+            const wrong =
+                Number(
+                    document.getElementById("wrong").value
+                );
+
+            if (
+                correct + wrong !== total
+            ) {
+
+                alert(
+                    "Correct + Wrong must equal Total Questions"
+                );
+
+                return;
+            }
+
+            if (
+                !chapter ||
+                total <= 0
+            ) {
+                alert("Fill all details");
+                return;
+            }
+
+            const accuracy =
+                Math.round(
+                    (correct / total) * 100
+                );
+
+            let grade = "";
+            let status = "";
+
+            if (accuracy >= 90) {
+
+                grade = "A+";
+                status = "🔥 Excellent";
+
+            } else if (accuracy >= 80) {
+
+                grade = "A";
+                status = "✅ Very Good";
+
+            } else if (accuracy >= 70) {
+
+                grade = "B";
+                status = "👍 Good";
+
+            } else if (accuracy >= 60) {
+
+                grade = "C";
+                status = "⚠ Needs Revision";
+
+            } else {
+
+                grade = "D";
+                status = "❌ Re-study Chapter";
+            }
+
+            document.getElementById(
+                "accuracy"
+            ).textContent =
+                accuracy + "%";
+
+            document.getElementById(
+                "grade"
+            ).textContent =
+                grade;
+
+            document.getElementById(
+                "status"
+            ).textContent =
+                status;
+
+            const record = {
+
+                date:
+                    new Date()
+                        .toLocaleDateString(),
+
+                subject,
+
+                chapter,
+
+                total,
+
+                correct,
+
+                wrong,
+
+                accuracy,
+
+                grade,
+
+                status
+            };
+
+            let records =
+                JSON.parse(
+                    localStorage.getItem(
+                        "performanceRecords"
+                    )
+                ) || [];
+
+            records.push(record);
+
+            localStorage.setItem(
+                "performanceRecords",
+                JSON.stringify(records)
+            );
+
+            renderRecords();
+
+            document.getElementById(
+                "chapter"
+            ).value = "";
+
+            document.getElementById(
+                "total"
+            ).value = "";
+
+            document.getElementById(
+                "correct"
+            ).value = "";
+
+            document.getElementById(
+                "wrong"
+            ).value = "";
+        }
+
+        function renderRecords() {
+
+            const records =
+                JSON.parse(
+                    localStorage.getItem(
+                        "performanceRecords"
+                    )
+                ) || [];
+
+            const container =
+                document.getElementById(
+                    "records"
+                );
+
+            container.innerHTML = "";
+
+            [...records]
+                .reverse()
+                .forEach((record, index) => {
+
+                    const card =
+                        document.createElement("div");
+
+                    card.className =
+                        "stat-card";
+
+                    card.innerHTML = `
+<h3>${record.chapter}</h3>
+
+<p>${record.subject}</p>
+
+<p>
+Accuracy:
+${record.accuracy}%
+</p>
+
+<p>
+Grade:
+${record.grade}
+</p>
+
+<p>
+${record.status}
+</p>
+
+<small>
+${record.date}
+</small>
+
+<br><br>
+
+<button onclick="editRecord(${index})">
+✏️ Edit
+</button>
+
+<button onclick="deleteRecord(${index})">
+❌ Delete
+</button>
+`;
+
+                    container.appendChild(card);
+                });
+        }
+
+        renderRecords();
+
+        function deleteRecord(index) {
+
+            let records =
+                JSON.parse(
+                    localStorage.getItem(
+                        "performanceRecords"
+                    )
+                ) || [];
+
+            const realIndex =
+                records.length - 1 - index;
+
+            records.splice(
+                realIndex,
+                1
+            );
+
+            localStorage.setItem(
+                "performanceRecords",
+                JSON.stringify(records)
+            );
+
+            renderRecords();
+        }
+
+        function editRecord(index) {
+
+            let records =
+                JSON.parse(
+                    localStorage.getItem(
+                        "performanceRecords"
+                    )
+                ) || [];
+
+            const realIndex =
+                records.length - 1 - index;
+
+            const record =
+                records[realIndex];
+
+            document.getElementById(
+                "subject"
+            ).value =
+                record.subject;
+
+            document.getElementById(
+                "chapter"
+            ).value =
+                record.chapter;
+
+            document.getElementById(
+                "total"
+            ).value =
+                record.total;
+
+            document.getElementById(
+                "correct"
+            ).value =
+                record.correct;
+
+            document.getElementById(
+                "wrong"
+            ).value =
+                record.wrong;
+
+            records.splice(
+                realIndex,
+                1
+            );
+
+            localStorage.setItem(
+                "performanceRecords",
+                JSON.stringify(records)
+            );
+
+            renderRecords();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        }
+
+    </script>
+
+</body>
+
+</html>

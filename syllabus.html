@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Syllabus Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>📖 Syllabus Tracker</h1>
+            <p class="hero-subtitle">
+                Complete every chapter. One step closer to Rank 1.
+            </p>
+        </div>
+    </header>
+
+    <section class="stats-section">
+
+        <div class="stat-card">
+            <h3>Completed Chapters</h3>
+            <p id="completedCount">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Total Chapters</h3>
+            <p id="totalCount">0</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Progress</h3>
+            <p id="progressPercent">0%</p>
+        </div>
+
+    </section>
+
+    <section class="goal-section">
+
+        <div id="syllabusContainer"></div>
+
+    </section>
+
+    <script>
+
+        const syllabus = {
+
+            Agriculture: [
+                "Introduction of Agriculture",
+                "Haryana in Agriculture",
+                "India in Agriculture",
+                "Agriculture Experts",
+                "Classification of Crops",
+                "Crop Cultivation Terminology",
+                "Types of Agriculture",
+                "Soil Science",
+                "Properties of Soil",
+                "Climate and Monsoon",
+                "Irrigation Methods",
+                "Agronomy",
+                "Rabi Crops",
+                "Kharif Crops",
+                "Fruit Crops",
+                "Vegetable Crops",
+                "Floriculture",
+                "Seed Technology",
+                "Weed Science",
+                "Agricultural Implements",
+                "Agricultural Economics",
+                "Animal Husbandry",
+                "Important Tables"
+            ],
+
+            Science: [
+                "Chemical Reactions",
+                "Acids Bases Salts",
+                "Metals and Non-Metals",
+                "Carbon and Compounds",
+                "Periodic Classification",
+                "Life Processes",
+                "Control and Coordination",
+                "Reproduction",
+                "Heredity and Evolution",
+                "Environment",
+                "Natural Resources",
+                "Reflection and Refraction",
+                "Human Eye",
+                "Electricity",
+                "Magnetic Effects",
+                "Sources of Energy"
+            ],
+
+            SocialScience: [
+                "Sarasvati-Indus Civilisation",
+                "Ancient Civilisations",
+                "Major Philosophies",
+                "Medieval Society",
+                "Christianity and Islam",
+                "Foreign Invasions",
+                "Colonialism",
+                "Freedom Movement",
+                "50 Years of Independent India",
+                "Resources and Development",
+                "Forest Resources",
+                "Water Resources",
+                "Agriculture",
+                "Minerals and Energy",
+                "Manufacturing Industries",
+                "Lifelines of National Economy",
+                "Power Sharing",
+                "Federalism",
+                "Gender Religion Caste",
+                "Political Parties",
+                "Outcomes of Democracy",
+                "Development",
+                "Indian Economy",
+                "Money and Credit",
+                "Globalisation",
+                "Consumer Rights"
+            ],
+
+            Maths: [
+                "Real Numbers",
+                "Polynomials",
+                "Linear Equations",
+                "Quadratic Equations",
+                "Arithmetic Progressions",
+                "Coordinate Geometry",
+                "Triangles",
+                "Circles",
+                "Heights and Distances",
+                "Mensuration",
+                "Statistics",
+                "Probability"
+            ]
+
+        };
+
+
+        const container =
+            document.getElementById(
+                "syllabusContainer"
+            );
+
+        let totalChapters = 0;
+
+        function renderSyllabus() {
+
+            totalChapters = 0;
+
+            let completed = 0;
+
+            container.innerHTML = "";
+
+            Object.keys(syllabus).forEach(subject => {
+
+                const card =
+                    document.createElement("div");
+
+                card.className = "stat-card";
+
+                let html =
+                    `<h2>${subject}</h2>`;
+
+                syllabus[subject].forEach(chapter => {
+
+                    totalChapters++;
+
+                    const key =
+                        subject + "-" + chapter;
+
+                    const checked =
+                        localStorage.getItem(key)
+                        === "true";
+
+                    if (checked)
+                        completed++;
+
+                    html += `
+                    <div style="
+                        margin-top:10px;
+                        text-align:left;
+                    ">
+
+                    <label>
+
+                    <input
+                    type="checkbox"
+                    ${checked ? "checked" : ""}
+                    onchange="
+                    toggleChapter(
+                    '${key}',
+                    this.checked
+                    )
+                    "
+                    >
+
+                    ${chapter}
+
+                    </label>
+
+                    </div>
+                    `;
+                });
+
+                html += `
+                <br>
+
+                <button
+                onclick="resetSubject('${subject}')">
+                Reset Subject
+                </button>
+                `;
+
+                card.innerHTML = html;
+
+                container.appendChild(card);
+            });
+
+            document.getElementById(
+                "completedCount"
+            ).textContent =
+                completed;
+
+            document.getElementById(
+                "totalCount"
+            ).textContent =
+                totalChapters;
+
+            const percent =
+                Math.round(
+                    (completed /
+                        totalChapters) * 100
+                ) || 0;
+
+            document.getElementById(
+                "progressPercent"
+            ).textContent =
+                percent + "%";
+
+            localStorage.setItem(
+                "completedChapters",
+                completed
+            );
+        }
+
+        function resetSubject(subject) {
+
+            syllabus[subject]
+                .forEach(chapter => {
+
+                    localStorage.removeItem(
+                        subject + "-" + chapter
+                    );
+
+                });
+
+            renderSyllabus();
+        }
+
+        renderSyllabus();
+
+    </script>
+
+</body>
+
+</html>

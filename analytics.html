@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+    <div class="hero-content">
+        <h1>📈 Analytics Dashboard</h1>
+        <p class="hero-subtitle">
+            Your preparation report card
+        </p>
+    </div>
+</header>
+
+<section class="stats-section">
+
+    <div class="stat-card">
+        <h3>Total Practice Sessions</h3>
+        <p id="totalSessions">0</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Average Accuracy</h3>
+        <p id="averageAccuracy">0%</p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Best Accuracy</h3>
+        <p id="bestAccuracy">0%</p>
+    </div>
+
+</section>
+
+<section class="goal-section">
+
+    <h2>🏆 Subject Performance</h2>
+
+    <div id="subjectPerformance"></div>
+
+</section>
+
+<section class="goal-section">
+
+    <h2>🔥 Strong Chapters</h2>
+
+    <div id="strongChapters"></div>
+
+</section>
+
+<section class="goal-section">
+
+    <h2>⚠ Weak Chapters</h2>
+
+    <div id="weakChapters"></div>
+
+</section>
+
+<section class="goal-section">
+
+    <h2>🎯 Focus Next</h2>
+
+    <div id="focusNext"></div>
+
+</section>
+
+<script>
+
+const records =
+    JSON.parse(
+        localStorage.getItem(
+            "performanceRecords"
+        )
+    ) || [];
+
+document.getElementById(
+    "totalSessions"
+).textContent =
+    records.length;
+
+let totalAccuracy = 0;
+let bestAccuracy = 0;
+
+const subjectData = {};
+
+records.forEach(record => {
+
+    totalAccuracy += record.accuracy;
+
+    if(record.accuracy > bestAccuracy){
+        bestAccuracy = record.accuracy;
+    }
+
+    if(!subjectData[record.subject]){
+
+        subjectData[record.subject] = {
+            total:0,
+            count:0
+        };
+    }
+
+    subjectData[record.subject].total +=
+        record.accuracy;
+
+    subjectData[record.subject].count++;
+});
+
+const average =
+    records.length > 0
+    ? Math.round(
+        totalAccuracy /
+        records.length
+      )
+    : 0;
+
+document.getElementById(
+    "averageAccuracy"
+).textContent =
+    average + "%";
+
+document.getElementById(
+    "bestAccuracy"
+).textContent =
+    bestAccuracy + "%";
+
+
+// SUBJECT PERFORMANCE
+
+const subjectContainer =
+    document.getElementById(
+        "subjectPerformance"
+    );
+
+for(const subject in subjectData){
+
+    const avg =
+        Math.round(
+            subjectData[subject].total /
+            subjectData[subject].count
+        );
+
+    const card =
+        document.createElement("div");
+
+    card.className =
+        "stat-card";
+
+    card.innerHTML = `
+        <h3>${subject}</h3>
+        <p>${avg}%</p>
+    `;
+
+    subjectContainer.appendChild(card);
+}
+
+
+// CHAPTER ANALYSIS
+
+const strong =
+    document.getElementById(
+        "strongChapters"
+    );
+
+const weak =
+    document.getElementById(
+        "weakChapters"
+    );
+
+const focus =
+    document.getElementById(
+        "focusNext"
+    );
+
+// TOP 3 STRONG
+
+const strongRecords =
+    [...records]
+    .sort((a,b) =>
+        b.accuracy - a.accuracy
+    )
+    .slice(0,3);
+
+strongRecords.forEach(item => {
+
+    const card =
+        document.createElement("div");
+
+    card.className =
+        "stat-card";
+
+    card.innerHTML = `
+        <h3>${item.chapter}</h3>
+        <p>${item.accuracy}%</p>
+    `;
+
+    strong.appendChild(card);
+
+});
+
+
+// TOP 3 WEAK
+
+const weakRecords =
+    [...records]
+    .sort((a,b) =>
+        a.accuracy - b.accuracy
+    )
+    .slice(0,3);
+
+weakRecords.forEach(item => {
+
+    const card =
+        document.createElement("div");
+
+    card.className =
+        "stat-card";
+
+    card.innerHTML = `
+        <h3>${item.chapter}</h3>
+        <p>${item.accuracy}%</p>
+    `;
+
+    weak.appendChild(card);
+
+});
+
+
+// FOCUS NEXT
+
+weakRecords.forEach(item => {
+
+    const card =
+        document.createElement("div");
+
+    card.className =
+        "stat-card";
+
+    card.innerHTML = `
+        <h3>${item.chapter}</h3>
+        <p>Revise Immediately</p>
+    `;
+
+    focus.appendChild(card);
+
+});
+
+</script>
+
+</body>
+</html>
